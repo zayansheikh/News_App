@@ -45,24 +45,24 @@ export class News extends Component {
     this.updateNews()
   }
   handlePrevious = async ()=>{
-    // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b08d91886103424098f0ffe978d9ad7a&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`
-    // this.setState({loading:true})
-    // let data = await fetch(url)
-    // let parsedData = await data.json()
-    // console.log(parsedData)
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b08d91886103424098f0ffe978d9ad7a&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`
+    this.setState({loading:true})
+    let data = await fetch(url)
+    let parsedData = await data.json()
+    console.log(parsedData)
 
     this.setState({page: this.state.page - 1,});
     this.updateNews();
   }
   handleNext = async()=>{
-    // if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
+    if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
 
-    //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b08d91886103424098f0ffe978d9ad7a&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`
-    //   this.setState({loading:true})
-    //   let data = await fetch(url)
-    //   let parsedData = await data.json()
-    //   console.log(parsedData)
-    // }
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b08d91886103424098f0ffe978d9ad7a&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`
+      this.setState({loading:true})
+      let data = await fetch(url)
+      let parsedData = await data.json()
+      console.log(parsedData)
+    }
       
       this.setState({page: this.state.page + 1,});
       this.updateNews();
@@ -71,7 +71,7 @@ export class News extends Component {
     render() {
     return(
       <div className="container">
-          <h2 className="text-center bg-dark text-white" style={{marginTop:"100px"}}>My News - Top Headlines</h2>
+          <h2 className="text-center bg-dark text-white" style={{marginTop:"100px"}}>My News - Top Headlines from {this.capitalFirstLetter(this.props.category)} category</h2>
           <div className="row">
             {!this.state.loading && this.state.articles.map((element)=>{
               return <div className="col-md-4" key={element.url}>
